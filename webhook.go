@@ -57,6 +57,11 @@ func CreateWebhook() Webhook {
 	return Wh
 }
 
+// adds dynamic TS for footer
+func (wh *Webhook) SetTimeStamp(timeStamp string) {
+	wh.Embeds[0].Timestamp = timeStamp
+}
+
 // adds a footer
 
 func (wh *Webhook) AddFooter(text string, iconURL string) {
