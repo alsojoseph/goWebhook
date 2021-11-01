@@ -58,7 +58,7 @@ func CreateWebhook() Webhook {
 }
 
 // adds dynamic TS for footer
-func (wh *Webhook) SetTimeStamp(timeStamp string) {
+func (wh *Webhook) AddDynamicTimeStamp(timeStamp string) {
 	wh.Embeds[0].Timestamp = timeStamp
 }
 
