@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"net/http"
+        "time"
 )
 
 type Thumbnail struct {
@@ -55,6 +56,11 @@ func CreateWebhook() Webhook {
 	}
 
 	return Wh
+}
+
+// adds dynamic TS for footer
+func (wh *Webhook) AddDynamicTimeStamp() {
+	wh.Embeds[0].Timestamp = time.Now().Format(time.RFC3339)
 }
 
 // adds a footer
