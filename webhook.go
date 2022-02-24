@@ -24,6 +24,7 @@ type Footer struct {
 
 type Embed struct {
 	Title     string    `json:"title"`
+	Description string `json:"description"`
 	URL       string    `json:"url"`
 	Color     int       `json:"color"`
 	Timestamp string    `json:"timestamp"`
@@ -47,6 +48,7 @@ func CreateWebhook() Webhook {
 		Embeds: []Embed{
 			{
 				Title:     "",
+				Description: "",
 				URL:       "",
 				Color:     16411130,
 				Thumbnail: Thumbnail{URL: ""},
@@ -82,6 +84,12 @@ func (wh *Webhook) SetWebhookUsername(username string) {
 
 func (wh *Webhook) SetWebhookAvatarURL(avatarURL string) {
 	wh.AvatarURL = avatarURL
+}
+
+// add a description to the webhook
+
+func (wh *Webhook) SetWebhookDescription(description string) {
+	wh.Description = description
 }
 
 // add a title to the webhook
@@ -128,7 +136,7 @@ func (wh Webhook) SendWebhook(url string) *http.Response {
 	webhookData, err := json.Marshal(wh)
 
 	if err != nil {
-		panic("Eror encoding webhook data")
+		panic("Error encoding webhook data")
 	}
 
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(webhookData))
