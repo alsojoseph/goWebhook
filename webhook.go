@@ -89,7 +89,7 @@ func (wh *Webhook) SetWebhookAvatarURL(avatarURL string) {
 // add a description to the webhook
 
 func (wh *Webhook) SetWebhookDescription(description string) {
-	wh.Description = description
+	wh.Embeds[0].Description = description
 }
 
 // add a title to the webhook
