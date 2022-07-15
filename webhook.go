@@ -70,6 +70,12 @@ func (wh *Webhook) AddDynamicTimeStamp() {
 	wh.Embeds[0].Timestamp = time.Now().Format(time.RFC3339)
 }
 
+// add author
+
+func (wh *Webhook) SetAuthor(author string) {
+	wh.Embeds[0].Author = Author{Name: author}
+}
+
 // adds a footer
 
 func (wh *Webhook) AddFooter(text string, iconURL string) {
@@ -83,10 +89,6 @@ func (wh *Webhook) AddFooter(text string, iconURL string) {
 
 func (wh *Webhook) SetWebhookUsername(username string) {
 	wh.Username = username
-}
-
-func (wh *Webhook) SetAuthor(author string) {
-	wh.Embeds[0].Author = Author{Name: author}
 }
 
 // add a avatar to the webhook
