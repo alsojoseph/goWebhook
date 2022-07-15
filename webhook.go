@@ -7,10 +7,6 @@ import (
 	"time"
 )
 
-type Author struct {
-	Name string `json:"name"`
-}
-
 type Thumbnail struct {
 	URL string `json:"url"`
 }
@@ -27,7 +23,6 @@ type Footer struct {
 }
 
 type Embed struct {
-	Author      Author    `json:"author"`
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
 	URL         string    `json:"url"`
@@ -68,14 +63,6 @@ func CreateWebhook() Webhook {
 // adds dynamic TS for footer
 func (wh *Webhook) AddDynamicTimeStamp() {
 	wh.Embeds[0].Timestamp = time.Now().Format(time.RFC3339)
-}
-
-// add author
-
-func (wh *Webhook) SetAuthor(author string) {
-	wh.Embeds[0].Author = Author{
-		Name: author,
-	}
 }
 
 // adds a footer
