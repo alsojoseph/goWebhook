@@ -4,8 +4,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"net/http"
-        "time"
+	"time"
 )
+
+type Author struct {
+	Name string `json:"name"`
+}
 
 type Thumbnail struct {
 	URL string `json:"url"`
@@ -23,14 +27,15 @@ type Footer struct {
 }
 
 type Embed struct {
-	Title     string    `json:"title"`
-	Description string `json:"description"`
-	URL       string    `json:"url"`
-	Color     int       `json:"color"`
-	Timestamp string    `json:"timestamp"`
-	Thumbnail Thumbnail `json:"thumbnail"`
-	Fields    []Fields  `json:"fields"`
-	Footer    Footer    `json:"footer"`
+	Author      Author    `json:"author"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
+	URL         string    `json:"url"`
+	Color       int       `json:"color"`
+	Timestamp   string    `json:"timestamp"`
+	Thumbnail   Thumbnail `json:"thumbnail"`
+	Fields      []Fields  `json:"fields"`
+	Footer      Footer    `json:"footer"`
 }
 
 type Webhook struct {
@@ -47,12 +52,12 @@ func CreateWebhook() Webhook {
 		AvatarURL: "",
 		Embeds: []Embed{
 			{
-				Title:     "",
+				Title:       "",
 				Description: "",
-				URL:       "",
-				Color:     16411130,
-				Thumbnail: Thumbnail{URL: ""},
-				Fields:    []Fields{},
+				URL:         "",
+				Color:       16411130,
+				Thumbnail:   Thumbnail{URL: ""},
+				Fields:      []Fields{},
 			},
 		},
 	}
@@ -78,6 +83,14 @@ func (wh *Webhook) AddFooter(text string, iconURL string) {
 
 func (wh *Webhook) SetWebhookUsername(username string) {
 	wh.Username = username
+}
+
+func (wh *Webhook) SetAuthor(author string) {
+	wh.Embeds[0].Author = Author{Name: author}
+}
+
+func (wh *Webhook) SetTimeStamp(timeStamp string) {
+	wh.Embeds[0].Timestamp = timeStamp
 }
 
 // add a avatar to the webhook
