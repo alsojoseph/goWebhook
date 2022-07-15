@@ -8,7 +8,8 @@ import (
 )
 
 type Author struct {
-	Name string `json:"name"`
+	Name    string `json:"name"`
+	IconURL string `json:"icon_url"`
 }
 
 type Thumbnail struct {
@@ -71,10 +72,9 @@ func (wh *Webhook) AddDynamicTimeStamp() {
 }
 
 // add author
-func (wh *Webhook) SetAuthor(author string) {
-	wh.Embeds[0].Author = Author{
-		Name: author,
-	}
+
+func (wh *Webhook) SetAuthor(author, icon_url string) {
+	wh.Embeds[0].Author = Author{Name: author, IconURL: icon_url}
 }
 
 // adds a footer
