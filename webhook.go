@@ -73,7 +73,9 @@ func (wh *Webhook) AddDynamicTimeStamp() {
 // add author
 
 func (wh *Webhook) SetAuthor(author string) {
-	wh.Embeds[0].Author = Author{Name: author}
+	wh.Embeds[0].Author = Author{
+		Name: author,
+	}
 }
 
 // adds a footer
