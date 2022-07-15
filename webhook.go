@@ -89,10 +89,6 @@ func (wh *Webhook) SetAuthor(author string) {
 	wh.Embeds[0].Author = Author{Name: author}
 }
 
-func (wh *Webhook) SetTimeStamp(timeStamp string) {
-	wh.Embeds[0].Timestamp = timeStamp
-}
-
 // add a avatar to the webhook
 
 func (wh *Webhook) SetWebhookAvatarURL(avatarURL string) {
