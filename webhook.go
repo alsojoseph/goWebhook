@@ -37,6 +37,11 @@ type Embed struct {
 	Thumbnail   Thumbnail `json:"thumbnail"`
 	Fields      []Fields  `json:"fields"`
 	Footer      Footer    `json:"footer"`
+	Image       Image     `json:"image"`
+}
+
+type Image struct {
+	Url         string    `json:"url"`
 }
 
 type Webhook struct {
@@ -64,6 +69,10 @@ func CreateWebhook() Webhook {
 	}
 
 	return Wh
+}
+
+func (wh *Webhook) AddImage(image string) {
+	wh.Embeds[0].Image = image
 }
 
 // adds dynamic TS for footer
