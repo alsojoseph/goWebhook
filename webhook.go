@@ -72,7 +72,9 @@ func CreateWebhook() Webhook {
 }
 
 func (wh *Webhook) AddImage(image string) {
-	wh.Embeds[0].Image = image
+	wh.Embeds[0].Image = Image{
+		Url:	image,
+	}
 }
 
 // adds dynamic TS for footer
