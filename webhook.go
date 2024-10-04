@@ -41,7 +41,7 @@ type Embed struct {
 }
 
 type Image struct {
-	Url         string    `json:"url"`
+	Url string `json:"url"`
 }
 
 type Webhook struct {
@@ -73,7 +73,7 @@ func CreateWebhook() Webhook {
 
 func (wh *Webhook) AddImage(image string) {
 	wh.Embeds[0].Image = Image{
-		Url:	image,
+		Url: image,
 	}
 }
 
@@ -153,13 +153,13 @@ func (wh *Webhook) AddField(title string, value string, inline bool) {
 }
 
 // final function encodes webhook data and then posts to webhook provided via function args
-func (wh Webhook) SendWebhook(url string) *http.Response {
+func (wh Webhook) SendWebhook(url string) (*http.Response, error) {
 	client := &http.Client{}
 
 	webhookData, err := json.Marshal(wh)
 
 	if err != nil {
-		panic("Error encoding webhook data")
+		return nil, err
 	}
 
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(webhookData))
@@ -167,17 +167,15 @@ func (wh Webhook) SendWebhook(url string) *http.Response {
 	req.Header.Add("Content-Type", "application/json")
 
 	if err != nil {
-		panic("Error creating webhook request")
+		return nil, err
 	}
 
 	webhookPost, err := client.Do(req)
 
 	if err != nil {
-		panic("Error posting webhook")
+		return nil, err
 	}
 
-	if webhookPost.StatusCode == 204 {
-		return webhookPost
-	}
-	return webhookPost
+	return webhookPost, nil
+
 }
